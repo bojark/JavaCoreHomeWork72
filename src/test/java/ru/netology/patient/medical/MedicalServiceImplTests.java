@@ -1,4 +1,4 @@
-package medical;
+package ru.netology.patient.medical;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
