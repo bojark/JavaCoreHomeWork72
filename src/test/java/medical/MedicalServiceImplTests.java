@@ -1,3 +1,5 @@
+package medical;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,17 +13,13 @@ import ru.netology.patient.service.medical.MedicalServiceImpl;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-
-//    Проверить вывод сообщения во время проверки температуры checkTemperature
-//    Проверить, что сообщения не выводятся, когда показатели в норме.
-
 public class MedicalServiceImplTests {
 
 
-    final static PatientInfoRepository patientInfoRepository = Mockito.mock(PatientInfoRepository.class);
-    final SendAlertService alertService = Mockito.mock(SendAlertService.class);
-    final MedicalServiceImpl service = new MedicalServiceImpl(patientInfoRepository, alertService);
-    final static String patientId = "1";
+    private final static PatientInfoRepository patientInfoRepository = Mockito.mock(PatientInfoRepository.class);
+    private final SendAlertService alertService = Mockito.mock(SendAlertService.class);
+    private final MedicalServiceImpl service = new MedicalServiceImpl(patientInfoRepository, alertService);
+    private final static String patientId = "1";
 
     @BeforeAll
     public static void init() {
@@ -30,7 +28,6 @@ public class MedicalServiceImplTests {
                 new BloodPressure(15, 5))));
     }
 
-    //    Проверить вывод сообщения во время проверки давления checkBloodPressure
     @Test
     public void checkBloodPressureTest() {
         BloodPressure bloodPressure = new BloodPressure(20, 17);
@@ -38,7 +35,6 @@ public class MedicalServiceImplTests {
         Mockito.verify(alertService, Mockito.only()).send(Mockito.anyString());
     }
 
-    //    Проверить, что сообщения не выводятся, когда показатели в норме.
     @Test
     public void checkBloodPressureNormalTest() {
         BloodPressure bloodPressure = new BloodPressure(15, 5);
@@ -46,8 +42,6 @@ public class MedicalServiceImplTests {
         Mockito.verify(alertService, Mockito.never()).send(Mockito.anyString());
     }
 
-    //    Проверить вывод сообщения во время проверки температуры checkTemperature
-    //    TODO: Этот тест не проходит, не смог разобраться почему.
     @Test
     public void checkTemperatureTest() {
         BigDecimal temperature = new BigDecimal("39.6");
